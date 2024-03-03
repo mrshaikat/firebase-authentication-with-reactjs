@@ -17,5 +17,6 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'eslint-disable-next-line': 'no-useless-catch' 
   },
 }
