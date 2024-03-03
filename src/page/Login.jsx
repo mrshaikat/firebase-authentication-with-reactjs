@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { loginWithEmailAndPassword } from "../firebase";
+import { loginWithEmailAndPassword, signInWithGoogle } from "../firebase";
 
 export default function Login(){
     const navigate = useNavigate();
@@ -18,6 +18,11 @@ export default function Login(){
     
 }   
 
+const handleSigninWithGoogle = async() =>{
+    const user = await signInWithGoogle();
+    navigate("/home")
+}
+
     return (
         <>
         <div className="flex flex-col p-4 justify-center items-center">
@@ -31,7 +36,10 @@ export default function Login(){
                     <label htmlFor="password">Password</label>
                     <input className="mx-2 my2 p-1 border border-gray-100" type="password" id="password" value={password} onChange={(e)=> setPassword(e.target.value)} required placeholder="Password"/>
                 </div>
-                <button type="submit" onClick={handleLogin}>Login</button>
+               <div className="flex justify-center gap-2">
+               <button className="bg-black text-white p-1 rounded-md" type="submit" onClick={handleLogin}>Login</button>
+                <button className="bg-blue-500 text-white p-1 rounded-md" type="submit" onClick={handleSigninWithGoogle}>Sign In with google</button>
+               </div>
             </form>
             <p className="my-2">You have no account {''}
             <NavLink className="underline" to="/register">Register</NavLink>
